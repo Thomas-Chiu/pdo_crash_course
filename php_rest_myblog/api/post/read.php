@@ -1,25 +1,25 @@
 <?php
-// 設定 headers
+# 設定 headers
 header("Access-Control-Allow_origin: *");
 header("Content-Type: application/json");
 
-// 引用 Database & Post 類別
+# 引用 Database & Post 類別
 include_once "../../config/Database.php";
 include_once "../../models/Post.php";
 
-// 建立 DB 實體
+# 建立 DB 實體
 $database = new Database();
 $db = $database->connect();
 
-// 建立 Post 實體
+# 建立 Post 實體
 $post = new Post($db);
 
-// 呼叫 Post 函式
+# 呼叫 read 函式
 $result = $post->read();
-// 取得資料列數
+# 取得資料列數
 $num = $result->rowCount();
 
-// 整理資料
+# 整理資料
 if ($num > 0) {
   $posts_arr = array();
   $posts_arr["data"] = array();
@@ -41,7 +41,7 @@ if ($num > 0) {
     // push 到 data 陣列
     array_push($posts_arr["data"], $post_item);
 
-    // 轉成 JSON 格式
+    // 回傳 JSON
     echo json_encode($posts_arr);
   }
 } else {
