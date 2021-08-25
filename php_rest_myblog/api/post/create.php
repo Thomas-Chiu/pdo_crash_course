@@ -17,10 +17,24 @@ $post = new Post($db);
 # 取得原始 POST 資料
 $data = json_decode(file_get_contents("php://input"));
 
+# 驗證 POST 資料
+if (
+  $data->title === null ||
+  $data->body === null ||
+  $data->author === null ||
+  $data->category_id === null
+) {
+  echo json_encode(
+    array("msg" => "格式錯誤")
+  );
+  die();
+}
+
 $post->title = $data->title;
 $post->body = $data->body;
 $post->author = $data->author;
 $post->category_id = $data->category_id;
+
 
 # 回傳 JSON
 if ($post->create()) {

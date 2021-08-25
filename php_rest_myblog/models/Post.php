@@ -72,7 +72,7 @@ class Post
     $stmt->execute();
     // 取得資料
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    // 設置屬性
     $this->title = $row["title"];
     $this->body = $row["body"];
     $this->author = $row["author"];
