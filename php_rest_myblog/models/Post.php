@@ -110,4 +110,58 @@ class Post
     printf("error: %s . \n", $stmt->error);
     return false;
   }
+
+  # 修改資料
+  public function update()
+  {
+    $query = "UPDATE
+        $this->table 
+      SET 
+        title = :title,
+        body = :body,
+        author = :author,
+        category_id = :category_id
+      WHERE 
+        id = :id";
+
+    $stmt = $this->conn->prepare($query);
+    // 資料清理
+    $this->title = htmlspecialchars(strip_tags($this->title));
+    $this->body = htmlspecialchars(strip_tags($this->body));
+    $this->author = htmlspecialchars(strip_tags($this->author));
+    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+    $this->id = htmlspecialchars(strip_tags($this->id));
+    // 綁定參數 (具名參數)
+    $stmt->bindParam(":title", $this->title);
+    $stmt->bindParam(":body", $this->body);
+    $stmt->bindParam(":author", $this->author);
+    $stmt->bindParam(":category_id", $this->category_id);
+    $stmt->bindParam(":id", $this->id);
+    // 執行 query
+    if ($stmt->execute()) {
+      return true;
+    }
+    // 處理 error
+    printf("error: %s . \n", $stmt->error);
+    return false;
+  }
+
+  # 刪除資料
+  public function delete()
+  {
+    $query = "DELETE FROM $this->table WHERE id = ?";
+
+    $stmt = $this->conn->prepare($query);
+
+    $this->id = htmlspecialchars(strip_tags($this->id));
+
+    $stmt->bindParam(1, $this->id);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    printf("error: %s . \n", $stmt->error);
+    return false;
+  }
 }
