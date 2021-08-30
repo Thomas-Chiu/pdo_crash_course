@@ -1,6 +1,6 @@
 <?php
 # 設定 headers
-header("Access-Control-Allow_origin: *");
+header("Access-Control-Allow-origin: *");
 header("Content-Type: application/json");
 
 # 引用 Database & Post 類別
@@ -40,10 +40,9 @@ if ($num > 0) {
 
     // push 到 data 陣列
     array_push($posts_arr["data"], $post_item);
-
-    // 回傳 JSON
-    echo json_encode($posts_arr);
   }
+  // 回傳 JSON
+  echo json_encode($posts_arr);
 } else {
   // 無資料
   echo json_encode(

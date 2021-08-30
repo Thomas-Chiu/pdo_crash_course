@@ -1,9 +1,9 @@
 <?php
-header("Access-Control-Allow_origin: *");
+header("Access-Control-Allow-origin: *");
 header("Content-Type: application/json");
 # 限制 req 權限
-header("Access-Control-Allow_Methods: PUT");
-header("Access-Control_Allow-Headers: Access-Control_Allow_Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With");
+header("Access-Control-Allow-Methods: PUT");
+header("Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With");
 
 include_once "../../config/Database.php";
 include_once "../../models/Post.php";
